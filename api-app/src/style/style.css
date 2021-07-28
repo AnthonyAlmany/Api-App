@@ -1,0 +1,135 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+main{
+    min-height: 100vh;
+    background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.glass{
+    background: white;
+    min-height: 80vh;
+    width: 60%;
+    background: linear-gradient(to right bottom, rgba(255,255,255,0.7), rgba(255,255,255,0.3));
+    border-radius: 2rem;
+    z-index: 2;
+    backdrop-filter: blur(2rem);
+    display: flex;
+   
+}
+
+.logo{
+    margin-top: 1rem;
+}
+
+.logo h3{
+    font-family: 'Poppins', sans-serif;
+    color: #3b8174;
+}
+
+.circle1,.circle2{
+    background: white;
+    background: linear-gradient(to right bottom, rgba(255,255,255,0.8), rgba(255,255,255,0.3));
+  
+    position: absolute;
+    border-radius: 50%;
+}
+
+.circle1{
+top: 5%;
+right: 15%;
+height: 15rem;
+width: 15rem;
+}
+
+.circle2{
+bottom: 5%;
+left:10%;
+height: 12rem;
+width: 12rem;
+}
+
+.dash-menu{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background: linear-gradient(to right bottom, rgba(255,255,255,0.7), rgba(255,255,255,0.3));
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex:1;
+}
+
+.links{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    flex:3;
+    margin-bottom: 5rem;
+}
+
+.cards{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items:stretch;
+    flex: 3;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.card{
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(to left top, rgba(255,255,255,0.6),rgba(255,255,255,0.4));
+    box-shadow: 6px 6px 20px rgba(122,122,122,0.2);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.card img{
+    margin-right: 2rem;
+}
+
+.card h3{
+    color: rgb(61, 201, 175);
+    font-family: 'Poppins', sans-serif;
+}
+
+.card-info{
+    display: flex;
+    align-items: center;
+}
+
+
+
+.data-card{
+    display: flex;
+    align-items: center;
+}
+    
+.weather-card{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: linear-gradient(to left top, rgba(255,255,255,0.6),rgba(255,255,255,0.4));
+    box-shadow: 6px 6px 20px rgba(122,122,122,0.2);
+    border-radius: 1rem;    
+  
+}
+.weather-card h3{
+    color: rgb(61, 201, 175);
+    font-family: 'Poppins', sans-serif;
+}
