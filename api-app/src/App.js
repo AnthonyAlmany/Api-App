@@ -1,12 +1,15 @@
 // Redux branch
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { loadWeather } from "./actions/weatherAction";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+
 
 // Material UI
 import { MenuItem } from '@material-ui/core';
@@ -22,7 +25,7 @@ import LinkLogo from "./style/Link_Logo.png"
 //Components
 import Card from "./components/Card"
 import WeatherCard from "./components/Link2"
-import { instanceEth, instanceBtc, instanceLink, instanceWeather } from './axios'
+import { instanceEth, instanceBtc, instanceLink } from './axios'
 
 
 function App() {
@@ -35,9 +38,9 @@ function App() {
   const [LinkPrice, setLinkPrice] = useState("");
 
   // UseState Weather API
-  const [Temperature, setTemperature] = useState("");
-  const [City, setCity] = useState("");
-  const [Condition, setCondition] = useState("");
+  // const [Temperature, setTemperature] = useState("");
+  // const [City, setCity] = useState("");
+  // const [Condition, setCondition] = useState("");
 
   // Fetch Currency API
   useEffect(() => {
@@ -54,17 +57,29 @@ function App() {
   }, [])
 
   // Fetch weather API
+  // useEffect(() => {
+  //   async function fetchWeatherData() {
+  //     const requestWeather = await instanceWeather.get();
+
+  //     setTemperature(requestWeather.data.current.temp_c)
+  //     setCondition(requestWeather.data.current.condition.icon)
+  //     setCity(requestWeather.data.location.name)
+
+  //   }
+  //   fetchWeatherData();
+  // }, [])
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    async function fetchWeatherData() {
-      const requestWeather = await instanceWeather.get();
+    dispatch(loadWeather());
+  }, [dispatch]);
 
-      setTemperature(requestWeather.data.current.temp_c)
-      setCondition(requestWeather.data.current.condition.icon)
-      setCity(requestWeather.data.location.name)
+  const { temperature, condition, city } = useSelector(
+    (state) => state
+  )
 
-    }
-    fetchWeatherData();
-  }, [])
+
 
   return (
     <Router>
@@ -98,19 +113,19 @@ function App() {
               </Route>
 
               <Route path="/link2" exact>
-                <WeatherCard temperature={Temperature} city={City} condition={Condition} />
+                <WeatherCard temperature={temperature} city={city} condition={condition} />
               </Route>
             </Switch>
 
           </div>
 
-        </main >
+        </main>
         <div className="circle1"></div>
         <div className="circle2"></div>
-      </div >
+      </div>
 
 
-    </Router >
+    </Router>
   )
 }
 

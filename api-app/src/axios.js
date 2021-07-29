@@ -14,8 +14,6 @@ const instanceLink = axios.create({
     baseURL: "https://api.coingecko.com/api/v3/simple/price?ids=chainlink&vs_currencies=usd",
 });
 
-const instanceWeather = axios.create({
-    baseURL: `http://api.weatherapi.com/v1/current.json?key=${weather_API_KEY}&q=Sydney&aqi=no`,
-})
+const weather = `http://api.weatherapi.com/v1/current.json?key=${weather_API_KEY}&q=Sydney&aqi=no`;
 
-export { instanceEth, instanceBtc, instanceLink, instanceWeather };
+export { instanceEth, instanceBtc, instanceLink, weather };
