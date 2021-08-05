@@ -1,5 +1,4 @@
 
-
 import React, { useEffect, useState } from 'react'
 import {
   BrowserRouter as Router,
@@ -22,33 +21,46 @@ import LinkLogo from "./style/Link_Logo.png"
 //Components
 import Card from "./components/Card"
 import WeatherCard from "./components/Link2"
-import { instanceEth, instanceBtc, instanceLink, instanceWeather } from './axios'
+import { instanceStockQuote, instanceWeather } from './axios'
 
+const mapping = {bitcoin: {title: 'BTC', logo: BtcLogo}, ethereum: {title: 'ETH', logo: EthLogo}, chainlink: {title: 'Link', logo: LinkLogo}};
+const cities = ['Sydney', 'Tokyo', 'Paris'];
 
 function App() {
 
   const linkStyle = { textDecoration: "none", color: "#3dc9af" }
 
-  // UseState Currency API
-  const [BtcPrice, setBtcPrice] = useState("");
-  const [EthPrice, setEthPrice] = useState("");
-  const [LinkPrice, setLinkPrice] = useState("");
+ 
 
-  // UseState Weather API
-  const [Temperature, setTemperature] = useState("");
-  const [City, setCity] = useState("");
-  const [Condition, setCondition] = useState("");
+  
+  const [StockQuotes, setStockQuotes] = useState([])
+  const [Weathers, setWeathers] = useState([]);
+
 
   // Fetch Currency API
   useEffect(() => {
     async function fetchData() {
-      const requestEth = await instanceEth.get();
-      const requestBtc = await instanceBtc.get();
-      const requestLink = await instanceLink.get();
 
-      setBtcPrice(requestBtc.data.bitcoin.usd)
-      setEthPrice(requestEth.data.ethereum.usd)
-      setLinkPrice(requestLink.data.chainlink.usd)
+      const promises = Object.keys(mapping).map((apiName) => instanceStockQuote(apiName).get());
+   
+      try {
+        const quotes = (await Promise.allSettled(promises)).map((result) => {
+          const apiName = Object.keys(result.value.data)[0];
+          console.log(result)
+          return {
+              apiName,
+              title: mapping[apiName].title,
+              price: result.value.data[apiName].usd,
+              logo: mapping[apiName].logo
+          }
+        });
+  
+        setStockQuotes(quotes);
+       
+      } catch(err) {
+        console.error(err);
+        setStockQuotes([]);
+      }      
     }
     fetchData();
   }, [])
@@ -56,12 +68,22 @@ function App() {
   // Fetch weather API
   useEffect(() => {
     async function fetchWeatherData() {
-      const requestWeather = await instanceWeather.get();
 
-      setTemperature(requestWeather.data.current.temp_c)
-      setCondition(requestWeather.data.current.condition.icon)
-      setCity(requestWeather.data.location.name)
+      const promises = cities.map((city) => instanceWeather(city).get());
+      try {
+        const weathers = (await Promise.allSettled(promises)).map((result) => { return {
+          city: result.value.data.location.name,
+          condition: result.value.data.current.condition.icon,
+          temperature: result.value.data.current.temp_c
+        };
+      });
+      
+      setWeathers(weathers);
 
+      } catch(err) {
+        console.error(err);
+        setWeathers([]);
+      }
     }
     fetchWeatherData();
   }, [])
@@ -77,10 +99,10 @@ function App() {
               </div>
               <div className="links">
                 <div className="link">
-                  <Link to="/" style={linkStyle}><MenuItem><TimelineIcon style={{ fontSize: 30 }} /> </MenuItem> </Link>
+                  <Link to="/" style={linkStyle}><MenuItem><span className="menu-icon"><TimelineIcon /></span> </MenuItem> </Link>
                 </div>
                 <div className="link">
-                  <Link to="/link2" style={linkStyle}><MenuItem><CloudIcon style={{ fontSize: 30 }} /></MenuItem></Link>
+                  <Link to="/link2" style={linkStyle}><MenuItem><span className="menu-icon"><CloudIcon /></span></MenuItem></Link>
                 </div>
                 <div className="link">
                   <Link to="/link3" ></Link>
@@ -91,14 +113,14 @@ function App() {
             <Switch>
               <Route path="/" exact>
                 <div className="cards">
-                  <Card title="BTC" price={BtcPrice} logo={BtcLogo} />
-                  <Card title="ETH" price={EthPrice} logo={EthLogo} />
-                  <Card title="Link" price={LinkPrice} logo={LinkLogo} />
+                  {StockQuotes.map((quote) => <Card key={quote.title} title={quote.title} price={quote.price} logo={quote.logo}/>)}
                 </div>
               </Route>
 
               <Route path="/link2" exact>
-                <WeatherCard temperature={Temperature} city={City} condition={Condition} />
+            <div className="cards">
+                {Weathers.map((weather) => <WeatherCard key={weather.city} temperature={weather.temperature} city={weather.city} condition={weather.condition} />)}
+                </div>
               </Route>
             </Switch>
 

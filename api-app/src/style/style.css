@@ -80,6 +80,11 @@ width: 12rem;
     margin-bottom: 5rem;
 }
 
+.menu-icon svg {
+    font-size: 2.5rem;
+}
+
+
 .cards{
     display: flex;
     flex-direction: column;
@@ -99,13 +104,25 @@ width: 12rem;
     padding: 1rem;
 }
 
+
+
 .card img{
     margin-right: 2rem;
+    width: 72px;
+    height: 72px;
 }
 
-.card h3{
+
+.pair-font{
     color: rgb(61, 201, 175);
     font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+}
+
+.price-font{
+    color: rgb(61, 201, 175);
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
 }
 
 .card-info{
@@ -118,6 +135,11 @@ width: 12rem;
 .data-card{
     display: flex;
     align-items: center;
+}
+
+.weather-card-container{
+    display: flex;
+    flex-direction: column;
 }
     
 .weather-card{
@@ -133,3 +155,85 @@ width: 12rem;
     color: rgb(61, 201, 175);
     font-family: 'Poppins', sans-serif;
 }
+.weather-card img{
+    height: 80px;
+    width: 80px;
+}
+
+@media screen and (max-width: 768px){
+    .glass{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px){
+    .glass{
+        flex-direction: column;
+        height: 100vh;
+        border-radius: 0;
+    }
+    .dash-menu{
+        flex-direction: row;
+        flex: 0;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+
+    }
+    .logo{
+        margin-top: 0;
+        flex: 1;
+        font-size: 12px;
+        margin-left: 10px;
+        margin-right: 10px;
+    
+    }
+
+    .links{
+        flex-direction: row;
+        margin-bottom: 0;
+    }
+
+    .card{
+        justify-content: space-evenly;
+    }
+
+    .card img{
+        margin-right: 0.8rem;
+        width: 54px;
+        height: 54px;
+    }
+
+    .cards{
+        width: 90%;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+    .pair-font {
+        font-size: 14px;
+        margin-right: 4px;
+    }
+    .price-font {
+        font-size: 14px;
+    }
+    .weather-card{
+        font-size: 14px;
+    }
+    .weather-card img{
+        height: 50px;
+        width: 50px;
+    }
+    .menu-icon svg {
+        font-size: 1.5rem;
+        margin-top: 0.5rem;
+    }
+}
+
+
+
+/* 
+320px — 480px: Mobile devices
+481px — 768px: iPads, Tablets
+769px — 1024px: Small screens, laptops
+1025px — 1200px: Desktops, large screens
+1201px and more —  Extra large screens, TV */
+
