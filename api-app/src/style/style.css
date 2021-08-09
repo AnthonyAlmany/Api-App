@@ -226,6 +226,9 @@ width: 12rem;
         font-size: 1.5rem;
         margin-top: 0.5rem;
     }
+    .circle1,.circle2{
+        display: none;
+    }
 }
 
 
