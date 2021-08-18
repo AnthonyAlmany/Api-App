@@ -26,13 +26,11 @@ import { instanceStockQuote, instanceWeather } from './axios'
 const mapping = {bitcoin: {title: 'BTC', logo: BtcLogo}, ethereum: {title: 'ETH', logo: EthLogo}, chainlink: {title: 'Link', logo: LinkLogo}};
 const cities = ['Sydney', 'Tokyo', 'Paris'];
 
+
 function App() {
 
   const linkStyle = { textDecoration: "none", color: "#3dc9af" }
 
- 
-
-  
   const [StockQuotes, setStockQuotes] = useState([])
   const [Weathers, setWeathers] = useState([]);
 
@@ -46,7 +44,6 @@ function App() {
       try {
         const quotes = (await Promise.allSettled(promises)).map((result) => {
           const apiName = Object.keys(result.value.data)[0];
-          console.log(result)
           return {
               apiName,
               title: mapping[apiName].title,
