@@ -6,7 +6,7 @@ const instanceStockQuote = (apiName) => axios.create({
 })
 
 const instanceWeather = (city) => axios.create({
-    baseURL: `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${city}&aqi=no`,
+    baseURL: `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_API_KEY}&q=${city}&aqi=no`,
 })
 
 export { instanceWeather, instanceStockQuote };
